@@ -1,0 +1,27 @@
+html
+  head
+    style
+      include style.css
+  body
+    nav.navbar 
+      ul  
+        li #[a(href="/") Home]
+        li #[a(href="/") About us]
+        li #[a(href="/") Contact us]
+        li #[a(href="/") Class Info]
+        li #[a(href="/") Help]
+    section#introsec
+        div.introdiv1 Welcome to XBORG Dance Academy
+        div.introdiv  Eat sleep dance repeat
+    section#midsec
+        | this is section2
+    section#foot
+      form(action="/" method="post" id="form")
+        label(for="name") Name: 
+        input(type="text", name="name" id="name")
+        br
+        label(for="age") Age :
+        input(type="text", name="age" id="age") 
+        button(type="submit" id="btn") Submit
+
+          

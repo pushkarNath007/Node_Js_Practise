@@ -1,0 +1,83 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding:0;
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+    font-family:fantasy;
+    background-color: black;
+    color:azure;
+    font-style: italic;
+}
+a{
+    display:inline-block;
+    text-decoration: none;
+    color:azure;
+}
+image{
+    display: inline-block;
+}
+.navbar{
+    /* list-style: none; */
+    /* border:3px solid red; */
+    background-color: rgb(8, 8, 8);
+    height: fit-content;
+    /* margin-top:12px; */
+    /* height:53px; */
+    /* display:flex;
+    align-items: center;
+    justify-content: center; */
+}
+.navbar ul{
+    /* border:2px solid green; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.navbar li{
+    /* border:2px solid blue; */
+    list-style: none;
+    /* flex:1 1 70px; */
+    /* padding:3px 23px; */
+    margin:auto;
+    margin-top:12px;
+}
+#introsec{
+    background: url("https://img.freepik.com/free-vector/party-crowd-silhouettes-dancing-nightclub_1048-11557.jpg?size=626&ext=jpg&ga=GA1.2.1943345307.1651399245") no-repeat center center/cover;
+    background-size:100% 100% ;
+    /* background-attachment:local; */
+    /* object-fit:contain; */
+    /* object-position: 10% 100%; */
+    height:300px;
+    background-color: rgb(229, 71, 200);
+    text-shadow: 3px 3px rgb(2, 2, 2);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: fantasy;
+    font-style: italic;
+}
+#introsec .introdiv1{
+   
+    font-size: 2rem;
+}
+#introsec .introdiv{
+   font-size: 1rem;
+}
+
+#midsec{
+    height:300px;
+    background-color: brown;
+}
+/* #right{
+    height:300px;
+    background-color:rgb(219, 243, 31);
+} */
+#foot{
+    height:200px;
+    background-color: chartreuse;
+}

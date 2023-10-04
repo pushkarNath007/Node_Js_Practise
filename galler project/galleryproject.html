@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="responsive_gallery.css" media="screen and (max-width:937px)">
+    <title>photo gallery</title>
+    <style>
+        /* @media only screen and(max-width:937px){
+            .main{
+               /* display:grid; 
+               background-color: brown;
+               grid-template-columns: 1fr 0fr;
+               overflow-x: hidden;
+            }
+            /* .item img{
+                width:100%;
+            }
+            #choice{
+                display:grid;
+                grid-template-columns: repeat(auto-fit,minmax(90px,1fr));
+            }
+            .options{
+                display: block;
+            } 
+        } */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            /* width:100%; */
+            height: 100%;
+            overflow-x: hidden;
+            /* overflow-y: hidden; */
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: black;
+            color: white;
+        }
+
+        #loading {
+            background: url("https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921") no-repeat center;
+            background-color: whitesmoke;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 200;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+
+        }
+
+        /* #heading2 img{
+          
+            height:30px;
+           width:30px; 
+           /* object-fit:cover;
+           object-position: 30%  60%; */
+        /* border-radius: 32px; */
+        /* transform: scale(2); */
+        /* background-color; 
+           filter: invert(100%);
+        } 
+         #heading2 {
+         height:34px;
+         background-color: rgba(205, 214, 222, 0.167);
+         /* border:2px solid green; 
+         margin-top:27px;
+        } */
+        li {
+            /* text-decoration: none; */
+            list-style: none;
+        }
+
+        .headers {
+            display: flex;
+            /* margin:23px; */
+            /* justify-conte; */
+            /* border:2px solid red; */
+            height: 95px;
+            position: fixed;
+            width: 100%;
+            z-index: 8;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .heading {
+            /* flex:1 1 30px; */
+            display: flex;
+            /* border:2px solid green; */
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px;
+            margin-top: 12px;
+            /*  */
+            align-items: center;
+            /* position:fixed; */
+
+        }
+
+        .headers a {
+            color: whitesmoke;
+            font-weight: bolder;
+            padding: 1px;
+        }
+
+        input[type="search"] {
+            width: 333px;
+        }
+
+        #heading5 {
+            margin-left: -3px;
+        }
+
+        #heading3 {
+            margin-left: 89px;
+            font-size: 28px;
+        }
+
+        #heading1 {
+            font-size: 28px;
+            font-weight: 1000;
+            /* font-weight: bolder; */
+        }
+
+        .headers a:hover {
+            transform: scale(1.2);
+        }
+
+        #heading3 a:hover {
+            transform: scale(1.1);
+        }
+
+        #heading4 a:hover {
+            transform: scale(1);
+        }
+
+        .labelbox {
+            /* margin-top:23px; */
+            position: absolute;
+            top: 24px;
+            left: 58px;
+            height: 54px;
+            width: 41px;
+            /* background-color: white; 
+         border: 2px solid red; */
+            z-index: 110;
+
+        }
+
+        .labelbox:hover {
+            transform: scale(1.2);
+        }
+
+        .labelbox img {
+            height: 40px;
+            width: 34px;
+            filter: invert(100%);
+        }
+
+        .menubar {
+            margin-top: 75px;
+            /* border:2px solid gold; */
+            width: 283px;
+            position: fixed;
+            height: 100%;
+            transform: translateX(-283px);
+            transition: transform 250ms ease-in-out;
+            background-color: rgb(81, 88, 88);
+
+        }
+
+        #menuicon:checked~.menubar {
+            transform: translateX(0px);
+            transition: transform 250ms ease-in-out;
+            z-index: 100;
+        }
+
+        #list1 {
+            margin-top: -16px;
+        }
+
+        .list {
+            margin-left: -40px;
+            border: 2px solid black;
+            text-align: center;
+            /* margin-top:-12px; */
+
+        }
+
+        .menu a {
+            padding: 26px;
+            color: rgb(110, 110, 193);
+            font-size: 21px;
+            color: whitesmoke;
+
+        }
+
+        #list6 {
+            border-bottom: none;
+        }
+
+        .menu a:hover {
+            color: white;
+            transform: scale(1.2);
+        }
+
+        header>input[type="checkbox"] {
+            opacity: 0.1;
+        }
+
+        .main {
+            margin-top: 83px;
+            /* border:2px solid red; */
+            display: grid;
+            grid-template-columns: 4fr 1fr;
+            /* grid-area: ; */
+            /* grid-template-columns:repeat(auto-fit,minmax(600px,1fr)) ; */
+            grid-gap: 12px;
+            z-index: -1;
+        }
+
+        .item img {
+            display: inline-block;
+            height: 194px;
+            width: 233px;
+
+        }
+
+        .middle {
+            margin-top: 1px;
+            /* border:2px solid blue; */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(223px, 1fr));
+            /*  */
+            /* -ms-grid-column-align: start; */
+            justify-content: center;
+            align-items: center;
+            /* grid-gap: 3px; */
+            grid-row-gap: 18px;
+            /* grid-column-gap: -6px;; */
+        }
+
+        .item {
+            margin-left: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.226);
+            /* flex:2 2 233px; */
+            width: fit-content;
+        }
+
+        .text {
+            width: 226px;
+            height: 45px;
+            text-align: center;
+
+        }
+
+        .item {
+            display: none;
+        }
+
+        .item :hover {
+            transform: scale(0.9);
+        }
+
+        .btndiv {
+            margin-top: 23px;
+            /* border:2px solid yellowgreen; */
+            display: inline-block;
+            text-align: center;
+            width: 79%;
+        }
+
+        .middle li:nth-child(1) {
+            display: inline-block;
+        }
+
+        .middle li:nth-child(2) {
+            display: inline-block;
+        }
+
+        .middle li:nth-child(3) {
+            display: inline-block;
+        }
+
+        .middle li:nth-child(4) {
+            display: inline-block;
+        }
+
+        .end {
+            border: 2px solid rgba(166, 170, 159, 0.122);
+            height: 383px;
+            overflow-y: scroll;
+            background-color: rgba(44, 44, 44, 0.228);
+        }
+
+        .genre {
+            text-align: center;
+        }
+
+        .options input[type="checkbox"] {
+            margin-top: 8px;
+        }
+
+        #choice {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            grid-gap: 4px;
+        }
+
+        .options {
+            display: inline-block;
+            /* border:2px solid red; */
+            align-items: center;
+            padding: 2px;
+        }
+
+        .options:hover {
+            background-color: rgba(255, 255, 255, 0.147);
+            color: gold;
+        }
+
+        #seasons,
+        #years {
+            margin-top: 12px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #go {
+            border: 2px solid green;
+            display: block;
+            /* margin-left:14px; */
+            /* height:8px; */
+            /* margin-top: 1px; */
+            /* margin-bottom: -8px; */
+            margin: auto;
+            width: 53px;
+            height: 22px;
+        }
+
+        /* #years{
+            display: flex;
+        } */
+        #spn {
+            /* display :block;
+            border:2px solid yellow; */
+            /* height:28px; */
+            /* margin-bottom: -12px;; */
+            /* margin-t; */
+            /* padding-bottom: 12px; 
+            margin: auto;*/
+            margin-top: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading"></div>
+    <header class="headers">
+        <div class="heading" id="heading1"><a href="#">&lt;</a></div>
+        <div class="heading" id="heading3"><a href="#">ANIMIXPLAY</a></div>
+        <div class="heading" id="heading4"><a href="#"><input type="search" name="searching" id="searching"
+                    placeholder="search here"></a></div>
+        <div class="heading" id="heading5"><a href="#"><button type="submit">search</button></a></div>
+        <div class="heading" id="heading6"><a href="#">random</a></div>
+        <div class="heading" id="heading7"><a href="#">a-z list</a></div>
+    </header>
+    <input type="checkbox" name="menuicon" id="menuicon">
+    <label for="menuicon" class="labelbox">
+        <div><img src="https://img.icons8.com/pastel-glyph/344/house.png" alt=""></div>
+    </label>
+    <section class="menubar">
+        <ul class="menu">
+            <li class="list" id="list1"><a href="#">Sub</a></li>
+            <li class="list" id="list2"><a href="#">Dub</a></li>
+            <li class="list" id="list3"><a href="#">All</a></a></li>
+            <li class="list" id="list4"><a href="#">Followed</a></li>
+            <li class="list" id="list5"><a href="#">Popular</a></li>
+            <li class="list" id="list6"><a href="#">Movies</a></li>
+        </ul>
+    </section>
+    <section class="main">
+        <ul class="middle">
+
+            <li class="item" id="item1"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/1406506/pexels-photo-1406506.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt=" error 404"></div>
+                    <div class="text">Naruto Shippuden</div>
+                </a></li>
+            <li class="item" id="item2"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/110812/pexels-photo-110812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="erroe 404"></div>
+                    <div class="text">Bleach</div>
+                </a></li>
+            <li class="item" id="item3"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/45853/grey-crowned-crane-bird-crane-animal-45853.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text"> Dragon ball</div>
+                </a></li>
+            <li class="item" id="item4"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/416179/pexels-photo-416179.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt=""></div>
+                    <div class="text">Death Note</div>
+                </a></li>
+            <li class="item" id="item5"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/792416/pexels-photo-792416.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt=""></div>
+                    <div class="text">Attock On titan</div>
+                </a></li>
+            <li class="item" id="item6"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/37833/rainbow-lorikeet-parrots-australia-rainbow-37833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="error 404"></div>
+                    <div class="text">Soul Land</div>
+                </a></li>
+            <li class="item" id="item7"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/36846/bald-eagle-adler-bird-of-prey-raptor.jpg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text">Dragon ball
+                </a></div>
+            </li>
+            <li class="item" id="item8"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/2491642/pexels-photo-2491642.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text">Tokyo Ghoul</div>
+                </a></li>
+            <li class="item" id="item9"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/1327405/pexels-photo-1327405.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text">Tales of demons and gods</div>
+                </a></li>
+            <li class="item" id="item10"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/1181181/pexels-photo-1181181.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text">Fighter of the destiny</div>
+                </a></li>
+            <li class="item" id="item10"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/1131454/pexels-photo-1131454.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text">Martial Universe</div>
+                </a></li>
+            <li class="item" id="item10"><a href="#">
+                    <div><img
+                            src="https://images.pexels.com/photos/1181181/pexels-photo-1181181.jpeg?auto=compress&cs=tinysrgb&w=400"
+                            alt="error 404"></div>
+                    <div class="text">Stellar Transformation</div>
+                </a></li>
+
+        </ul>
+        <div class="end">
+            <h1 class="genre">Genres</h1>
+            <div class="option">
+                <form action="#" id="choice">
+                    <div class="options" id="option1"><input type="checkbox" name="check" id="box1">
+                        <span><label for="box1">action</label></span>
+                    </div>
+                    <div class="options" id="option2"><input type="checkbox" name="check" id="box2"><span><label
+                                for="box2">Adventure</label></span></div>
+                    <div class="options" id="option3"><input type="checkbox" name="check" id="box3"><span><label
+                                for="box3">Anti-Hero</label></span></div>
+                    <div class="options" id="option4"><input type="checkbox" name="check" id="box4"><span><label
+                                for="box4">Comedy</label></span></div>
+                    <div class="options" id="option5"><input type="checkbox" name="check" id="box5"><span><label
+                                for="box5">Drama</label></span></div>
+                    <div class="options" id="option6"><input type="checkbox" name="check" id="box6"><span><label
+                                for="box6">Ecchi</label></span></div>
+                    <div class="options" id="option7"><input type="checkbox" name="check" id="box7"><span><label
+                                for="box7">Fantasy</label></span></div>
+                    <div class="options" id="option8"><input type="checkbox" name="check" id="box8"><span><label
+                                for="box8">Game</label></span></div>
+                    <div class="options" id="option9"><input type="checkbox" name="check" id="box9"><span><label
+                                for="box9">Harem</label></span></div>
+                    <div class="options" id="option10"><input type="checkbox" name="check" id="box10"><span><label
+                                for="box10">Historical</label></span></div>
+                    <div class="options" id="option11"><input type="checkbox" name="check" id="box11"><span><label
+                                for="box11">Horror</label></span></div>
+                    <div class="options" id="option12"><input type="checkbox" name="check" id="box12"><span><label
+                                for="box12">Idol</label></span></div>
+                    <div class="options" id="option13"><input type="checkbox" name="check" id="box13"><span><label
+                                for="box13">Isekai</label></span></div>
+                    <div class="options" id="option14"><input type="checkbox" name="check" id="box14"><span><label
+                                for="box14">Iyashikei</label></span></div>
+                    <div class="options" id="option15"><input type="checkbox" name="check" id="box15"><span><label
+                                for="box15">Josei</label></span></div>
+                    <div class="options" id="option16"><input type="checkbox" name="check" id="box16"><span><label
+                                for="box16">College</label></span></div>
+
+                    <div class="options" id="seasons">
+                        <div><label for="season">Season</label></div>
+                        <div><select name="seasons" id="season">
+                                <option value="Spring">Spring</option>
+                                <option value="Winter">Winter</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Fall">Fall</option>
+                            </select></div>
+                    </div>
+                    <div class="options" id="years">
+                        <div><label for="year">Years</label></div>
+                        <div><select name="years" id="year">
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                            </select></div>
+
+                    </div>
+            </div>
+            </form>
+            <div id="spn"><button id="go">Go</button></div>
+        </div>
+    </section>
+    <div class="btndiv"><button id="btn">Load More</button></div>
+    <script>
+        window.addEventListener("load", function run() {
+            loading.style.display = "none";
+        })
+        // console.log(arr);
+        let current = 4;// already 4 items are visible
+        let btn = document.querySelector("#btn");
+        btn.addEventListener("click", () => {
+            let arr = [...document.querySelectorAll(".item")];
+            for (let i = current; i < current + 4; ++i) {
+                arr[i].style.display = "inline-block";
+            }
+            current += 4;
+        })
+
+    </script>
+
+</body>
+
+</html>
